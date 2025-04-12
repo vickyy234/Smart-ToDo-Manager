@@ -17,7 +17,7 @@ router.post('/', authMiddleware, async (req, res) => {
 
 router.put('/:id', authMiddleware, async (req, res) => {
     const { id } = req.params;
-    const updated = await TodoModel.findByIdAndUpdate(id, req.body, { new: true })
+    const updated = await TodoModel.findByIdAndU(id, req.body, { new: true })
     res.json(updated)
 })
 
