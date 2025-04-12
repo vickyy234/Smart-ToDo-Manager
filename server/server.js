@@ -33,5 +33,5 @@ app.use('/api', registerRoute)
 const loginRoute = require('./routes/loginRouter')
 app.use('/api', loginRoute)
 
-const TodoModel = require('./schema_models/todoModel')
-app.use('/todos',TodoModel)
+const todos = require('./routes/todoRouter')
+app.use('/api/todos',todos)

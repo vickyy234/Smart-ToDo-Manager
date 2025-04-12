@@ -9,8 +9,8 @@ router.get('/', authMiddleware, async (req, res) => {
 })
 
 router.post('/', authMiddleware, async (req, res) => {
-    const { userId, task, isCompleted } = req.body;
-    const newtask = new TodoModel(({ userId, task, isCompleted }))
+    const { task, isCompleted } = req.body;
+    const newtask = new TodoModel(({ userId: req.userId, task, isCompleted }))
     await newtask.save()
     res.json(newtask)
 })
@@ -26,3 +26,5 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     await TodoModel.findByIdAndDelete(id)
     res.json({ Message: 'Task deleted' })
 })
+
+module.exports = router
