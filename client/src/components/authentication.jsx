@@ -1,4 +1,4 @@
-import '../styles/login.css'
+import '../styles/authentication.css'
 import pic from '../assets/pic.png'
 import { useState } from 'react'
 import axios from 'axios'
@@ -34,7 +34,6 @@ function Login() {
                     password: formData.password
                 }
             )
-            alert(response.data.message)
             navigate('/home')
         }
         catch (err) {
@@ -51,6 +50,9 @@ function Login() {
                 password: formData.password
             })
             setLogin(true)
+            setFormData({
+                password:""
+            })
             alert(response.data.message)
         }
         catch (err) {

@@ -7,15 +7,15 @@ router.post('/register', async (req, res) => {
     try {
         const user = await registerModel.findOne({ email })
         if (user) {
-            res.status(302).json({ Message: 'Account already exists' })
+            res.status(302).json({ message: 'Account already exists' })
         } else {
             const newRegister = new registerModel({ name, email, password })
             await newRegister.save()
-            res.status(201).json({ Message: 'Account created successfully' })
+            res.status(201).json({ message: 'Account created successfully' })
         }
     }
     catch (err) {
-        res.status(500).json({ Message: err })
+        res.status(500).json({ message: err })
     }
 })
 
