@@ -5,6 +5,7 @@ import './main.css'
 import axios from 'axios'
 
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL='http://localhost:5001/'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>

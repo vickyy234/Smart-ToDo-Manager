@@ -28,23 +28,34 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/login',
+            const response = await axios.post('api/login',
                 {
                     email: formData.email,
                     password: formData.password
                 }
             )
             alert(response.data.message)
-            // navigate('/home')
+            navigate('/home')
         }
         catch (err) {
-            alert(err.response?.data?.message)
-            navigate('/login')
+            alert(err.response?.data?.message || 'Server error')
         }
     }
 
-    const handleRegister = (event) => {
-        event.preventDefault();
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await axios.post('api/register', {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password
+            })
+            setLogin(true)
+            alert(response.data.message)
+        }
+        catch (err) {
+            alert(err.response?.data?.message || "Server error")
+        }
     }
 
 
