@@ -8,10 +8,10 @@ router.post('/login', async (req, res) => {
     try {
         const user = await registerModel.findOne({ email })
         if (!user) {
-            return res.status(404).json({ Message: 'Email not found!' })
+            return res.status(404).json({ message: 'Email not found!' })
         }
         if (user.password != password) {
-            return res.status(401).json({ Message: 'Incorrect password!' })
+            return res.status(401).json({ message: 'Incorrect password!' })
         }
         const token = jwt.sign({ userId: user._id }, 'secure', { expiresIn: '30m' })
         res.cookie('token', token, {
@@ -19,10 +19,10 @@ router.post('/login', async (req, res) => {
             secure: false,
             maxAge: 30 * 60 * 1000
         })
-        res.status(200).json({ Message: 'Login successful' })
+        res.status(200).json({ message: 'Login successful' })
     }
     catch (err) {
-        res.status(500).json({ Message: 'Server error' })
+        res.status(500).json({ message: 'Server error' })
     }
 })
 
