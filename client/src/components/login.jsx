@@ -12,7 +12,7 @@ function Login() {
             <div className="login_main">
                 <div className="login_container">
                     <div className="login">
-                        <h1>{ login ? "Welcome back" : "Create an account"}</h1>
+                        <h1>{login ? "Welcome back" : "Create an account"}</h1>
                         <form >
                             {login ? null : (<><label htmlFor="name">Name</label>
                                 <input type='text' id='name' placeholder='Enter your name' required /></>)}
