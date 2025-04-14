@@ -1,12 +1,17 @@
-# React + Vite
+# Frontend - Todo Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend part of the **Todo Manager Webpage**, built using **React**. It allows users to interact with the backend API for user authentication, task management, and other features like marking tasks as complete and editing tasks.
 
-Currently, two official plugins are available:
+## Features
+- **User Authentication**: Login and registration functionalities with JWT tokens.
+- **Task Management**: Users can add, update, delete, and mark tasks as completed.
+- **Auto Logout**: Automatic logout after 30 minutes of inactivity.
+- **Responsive UI**: The app is responsive and works well on both desktop and mobile devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+- **Frontend**: React.js
+- **State Management**: React's useState and useEffect hooks
+- **API Interaction**: Axios for making HTTP requests to the backend
+- **Authentication**: JWT (stored in HttpOnly cookies)
+- **Routing**: React Router for page navigation
+- **Styling**: CSS for styling
