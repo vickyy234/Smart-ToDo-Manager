@@ -12,15 +12,16 @@ function Login() {
         password: ""
     })
 
-    useEffect(() => {
-        const isLogin = async (e) => {
-            try {
-                const response = await axios.get('/api/todos')
-                navigate('/home')
-            }
-            catch (err) {
-            }
+    const isLogin = async (e) => {
+        try {
+            const response = await axios.get('/api/todos')
+            navigate('/home')
         }
+        catch (err) {
+        }
+    }
+
+    useEffect(() => {
         isLogin()
     }, [])
 
@@ -61,8 +62,8 @@ function Login() {
                 email: formData.email,
                 password: formData.password
             })
+            isLogin()
             alert(response.data.message)
-            navigate('/home')
         }
         catch (err) {
             alert(err.response?.data?.message || "Server error")
