@@ -8,11 +8,11 @@ function Home() {
     const [name, setName] = useState("")
     const [task, setTask] = useState("")
     const [tasks, setTasks] = useState([])
-    const [completed , setCompleted]= useState([])
+    const [completed, setCompleted] = useState([])
     const [editMode, seteditMode] = useState(false)
     const [editBtn, setEditBtn] = useState(false)
 
-    const fetchTask = async () => {
+    const fetchTasks = async () => {
         try {
             const response = await axios.get("api/todos")
             setName(response.data.userName)
@@ -25,23 +25,25 @@ function Home() {
     };
 
     useEffect(() => {
-        fetchTask()
+        fetchTasks()
     }, [setTasks])
 
     function handleChange(e) {
         setTask(e.target.value)
     }
 
-    const addTask = async (e) => {
+    const addTask = async () => {
         if (editMode === false) {
             if (task.trim() === '') {
                 alert("Enter a Task to add")
                 return;
             }
             else {
-                const response = await axios.post('/api/todos', { task})
-                fetchTask()
+                const response = await axios.post('/api/todos', { task })
+                fetchTasks()
             }
+        } else {
+            await axios.put(`/api/todos/${id}`, task)
         }
     }
 
@@ -49,15 +51,22 @@ function Home() {
         setEditBtn((prev) => !prev)
     }
 
-    function UpdateCompleted() {
+    const UpdateCompleted = async (id) => {
+        const toEdit = tasks.find(t => t._id === id)
+        const complete_status = !toEdit.isCompleted
         try {
-            
+            await axios.put(`/api/todos/${id}`, { isCompleted: complete_status })
+            fetchTasks()
         }
         catch (err) {
-            
+
         }
     }
- 
+
+    const editTask = async (id) => {
+        const toEdit = tasks.find(t => t._id === id)
+        setTask(toEdit.task)
+    }
 
     return (
         <div className="container">
@@ -73,19 +82,16 @@ function Home() {
             <ol>
                 {tasks.map((t) => {
                     return (
-                        <li key={t._id}>
+                        <li key={t._id} onClick={() => UpdateCompleted(t._id)} value={t.task}>
                             {
                                 t.isCompleted ? <div className="complete-signal">✅</div> : null
                             }
                             {t.task}
                             {
                                 editBtn === true ? <div className="task-actions">
-                                    <button onClick={() => editTask(index)}>✏️</button>
-                                    <button onClick={() => deleteTask(index)}>🗑️</button>
+                                    <button onClick={() => editTask(t._id)}>✏️</button>
+                                    <button onClick={() => deleteTask(t._id)}>🗑️</button>
                                 </div> : null
-                            }
-                            {
-                                t.isCompleted ? null : <button onClick={UpdateCompleted}>Completed</button>
                             }
                         </li>
                     )
