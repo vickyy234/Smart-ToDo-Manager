@@ -40,9 +40,16 @@ function Home() {
                 return;
             }
             else {
-                const response = await axios.post('/api/todos', { task })
-                fetchTasks()
-                setTask("")
+                try {
+                    const response = await axios.post('/api/todos', { task })
+                    fetchTasks()
+                    setTask("")
+                }
+                catch (err) {
+                    alert(err.response?.data?.message)
+                    navigate("/")
+                }
+
             }
         } else {
             await axios.put(`/api/todos/${editId}`, { task })
