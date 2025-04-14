@@ -61,11 +61,8 @@ function Login() {
                 email: formData.email,
                 password: formData.password
             })
-            setLogin(true)
-            setFormData({
-                password: ""
-            })
             alert(response.data.message)
+            navigate('/home')
         }
         catch (err) {
             alert(err.response?.data?.message || "Server error")
