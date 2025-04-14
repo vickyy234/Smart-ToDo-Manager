@@ -1,6 +1,5 @@
 import '../styles/authentication.css'
-import pic from '../assets/pic.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,6 +11,19 @@ function Login() {
         email: "",
         password: ""
     })
+
+    useEffect(() => {
+        const isLogin = async (e) => {
+            try {
+                const response = await axios.get('/api/todos')
+                navigate('/home')
+            }
+            catch (err) {
+            }
+        }
+        isLogin()
+    }, [])
+
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -51,7 +63,7 @@ function Login() {
             })
             setLogin(true)
             setFormData({
-                password:""
+                password: ""
             })
             alert(response.data.message)
         }
@@ -79,7 +91,7 @@ function Login() {
                         <h2>{login ? "Don't have an account yet?" : "Already have an account?"}<span onClick={handleToggle}>{login ? " Register for free" : " Login here"}</span></h2>
                     </div>
                     <div className='image'>
-                        <img src={pic} />
+                        <img src="pic.png" />
                     </div>
                 </div>
             </div>
