@@ -90,7 +90,6 @@ function Home() {
             </div>
 
             {tasks.length === 0 ? <h3>No Task Added!</h3> : <h5>Total task : {tasks.length}<br/>Click a Task to mark it as completed. </h5>}
-            {}
 
             <ol>
                 {tasks.map((t) => {
