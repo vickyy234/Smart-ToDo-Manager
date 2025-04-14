@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import '../styles/home.css'
 
 
 function Home() {
@@ -88,12 +89,13 @@ function Home() {
                 <button className='btn' onClick={toogleEditBtn}>{editBtn ? "Done" : "Edit"}</button>
             </div>
 
-            {tasks.length === 0 ? <h3>No Task Added!</h3> : <h5>Click a Task to mark it as completed.</h5>}
+            {tasks.length === 0 ? <h3>No Task Added!</h3> : <h5>Total task : {tasks.length}<br/>Click a Task to mark it as completed. </h5>}
+            {}
 
             <ol>
                 {tasks.map((t) => {
                     return (
-                        <li key={t._id} >
+                        <li key={t._id} style={{backgroundColor :  t.isCompleted ? "#d3ffd3" : "#fff"}}>
                             {
                                 t.isCompleted ? <div className="complete-signal">✅</div> : null
                             }

@@ -72,7 +72,6 @@ function Login() {
         }
     }
 
-
     return (
         <>
             <div className="login_main">
