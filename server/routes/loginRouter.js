@@ -16,7 +16,7 @@
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET , { expiresIn: '30m' })
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 maxAge: 30 * 60 * 1000
             })
             res.status(200).json({ message: 'Login successful'})
