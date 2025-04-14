@@ -8,8 +8,8 @@ function Home() {
     const [name, setName] = useState("")
     const [task, setTask] = useState("")
     const [tasks, setTasks] = useState([])
-    const [completed, setCompleted] = useState([])
     const [editMode, seteditMode] = useState(false)
+    const [editId, setEditId] = useState(0)
     const [editBtn, setEditBtn] = useState(false)
 
     const fetchTasks = async () => {
@@ -32,7 +32,7 @@ function Home() {
         setTask(e.target.value)
     }
 
-    const addTask = async () => {
+    const addTask = async (id) => {
         if (editMode === false) {
             if (task.trim() === '') {
                 alert("Enter a Task to add")
@@ -41,14 +41,19 @@ function Home() {
             else {
                 const response = await axios.post('/api/todos', { task })
                 fetchTasks()
+                setTask("")
             }
         } else {
-            await axios.put(`/api/todos/${id}`, task)
+            await axios.put(`/api/todos/${editId}`, { task })
+            fetchTasks()
+            setEditId(0)
+            setTask('')
         }
     }
 
     function toogleEditBtn() {
         setEditBtn((prev) => !prev)
+        seteditMode((prev) => !prev)
     }
 
     const UpdateCompleted = async (id) => {
@@ -66,6 +71,12 @@ function Home() {
     const editTask = async (id) => {
         const toEdit = tasks.find(t => t._id === id)
         setTask(toEdit.task)
+        setEditId(id)
+    }
+
+    const deleteTask = async (id) => {
+        await axios.delete(`/api/todos/${id}`)
+        fetchTasks()
     }
 
     return (
@@ -82,11 +93,11 @@ function Home() {
             <ol>
                 {tasks.map((t) => {
                     return (
-                        <li key={t._id} onClick={() => UpdateCompleted(t._id)} value={t.task}>
+                        <li key={t._id} >
                             {
                                 t.isCompleted ? <div className="complete-signal">✅</div> : null
                             }
-                            {t.task}
+                            <div className="task-content" onClick={() => UpdateCompleted(t._id)} value={t.task}>{t.task}</div>
                             {
                                 editBtn === true ? <div className="task-actions">
                                     <button onClick={() => editTask(t._id)}>✏️</button>
