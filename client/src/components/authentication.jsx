@@ -62,7 +62,7 @@ function Login() {
                 email: formData.email,
                 password: formData.password
             })
-            isLogin()
+            isLogin() 
             alert(response.data.message)
         }
         catch (err) {
