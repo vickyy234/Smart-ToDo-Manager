@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config()
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://smart-to-do-manager.vercel.app/',
     credentials: true
 }))
 app.use(express.json())
