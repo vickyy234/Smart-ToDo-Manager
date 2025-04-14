@@ -17,6 +17,7 @@
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true,
+                sameSite: 'None',
                 maxAge: 30 * 60 * 1000
             })
             res.status(200).json({ message: 'Login successful'})
